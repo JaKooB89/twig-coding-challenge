@@ -1,0 +1,14 @@
+.UserList {
+    margin-top: 28px;
+}
+.UserList li > span:not(:first-of-type) {
+    padding-left: 15px;
+}
+.UserList li > span:not(:last-of-type) {
+    padding-right: 15px;
+}
+.UserList li > span:not(:last-of-type):after {
+    content: '|';
+    position: relative;
+    right: -15px;
+}

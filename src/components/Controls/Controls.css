@@ -1,0 +1,17 @@
+.Controls {
+    text-align: center;
+    margin: 28px auto;
+}
+.Controls form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.Controls input[type='number'] {
+    max-width: 60px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    margin-top: 2px;
+    padding: 4px 6px;
+}

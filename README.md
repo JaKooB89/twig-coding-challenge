@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+# Twig Education Coding Challenge
+
+React app that uses [randomuser api](https://randomuser.me/) to generate random names and separate them into multiple list items.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Usage
 
-In the project directory, you can run:
+Install dependencies: `npm install`
 
-### `npm start`
+Run app: `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Build app: `npm run build`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Comments
 
-### `npm test`
+#### Coding Style / Practices
+Perhaps there is a more sophisticated solution to this task but from my experience often simples one is easiest to understand by everyone working with the code.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Of course, the style of code often depends on the person / workplace so without knowing Twig team's coding styles I did my best to write universally clean and understandable code.
 
-### `npm run build`
+#### Solution
+The required solution is a `splitToChunks()` function within `Helpers.js` file.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+My logic behind the code is quite simple:
+1. The function first checks if N (chunkSize) is a positive integer (using helper function).
+2. If N doesn't pass the check it returns an original array, if it does the code continues.
+3. Three variables are created. A clone of original array, an empty array that will store the result, and a calculated number of items that should be allocated in each sub-array.
+4. The function loops N number of times creating sub-array with each iteration.
+5. Each iteration is removing (previously calculated) number of items from the array and placing them in sub-arrays.
+6. With the last iteration only the remaining items are placed in the last sub-array.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### UI
+Even though it was not a requirement, I decided to refresh my React a bit and add a simple user interface to the application. It populates the array with random names from an API and displays them as N number of list items where number of both elements is controllable with input fields.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Testing
+Here are some example of test cases:
+```
+splitToChunks([1, 2, 3, 4, 5], 3)
+// RETURNS: [ [1, 2], [3, 4], [5] ]
+```
 
-### `npm run eject`
+```
+splitToChunks([1, true, 3, 4, 5, 6, 7, 8, 9, 10, 11, 'foo', 13], 5)
+// RETURNS: [ [1, true, 3], [4, 5, 6], [7, 8, 9], [10, 11, 'foo'], [13] ]
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+splitToChunks([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], false)
+// RETURNS: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+splitToChunks([1, 2, 3, 4], 0)
+// RETURNS: [1, 2, 3, 4]
+```
