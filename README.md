@@ -12,6 +12,8 @@ Run app: `npm start`
 
 Build app: `npm run build`
 
+Preview app: https://jakoob89.github.io/twig-coding-challenge/build/
+
 # Comments
 
 #### Coding Style / Practices
